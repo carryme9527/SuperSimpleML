@@ -22,6 +22,7 @@ def genRandomLinearBinaryDataset(dim=2, size=100):
         for i in range(size):
             x = np.random.rand(dim + 1) - 0.5
             x[-1] = 1
+            x *= 100
 
             X.append(x[:-1])
             y.append(linear(W, x))

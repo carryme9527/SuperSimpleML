@@ -4,8 +4,9 @@ import numpy as np
 
 
 class PLA():
-    def __init__(self, dim):
+    def __init__(self, dim, normalized=False):
         self.dim = dim
+        self.normalized = normalized
         self.W = np.zeros(self.dim + 1)
         self.X = np.zeros((0, dim))
         self.y = np.array([])
@@ -30,7 +31,10 @@ class PLA():
                 x = np.append(self.X[i], [1])
                 y_ = 1 if np.inner(self.W, x) > 0 else -1
                 if y_ != self.y[i]:
-                    self.W = self.W + self.y[i] * x
+                    update = self.y[i] * x
+                    if self.normalized:
+                        update /= np.linalg.norm(update)
+                    self.W = self.W + update
                     break
             else:
                 return
