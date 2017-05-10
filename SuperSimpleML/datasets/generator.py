@@ -3,7 +3,7 @@
 import numpy as np
 
 
-def genRandomLinearBinaryDataset(dim=2, size=100):
+def genRandomLinearBinaryDataset(dim=2, size=100, noise_ratio=0):
     lower_pct = 0.2
     upper_pct = 0.8
 
@@ -31,4 +31,8 @@ def genRandomLinearBinaryDataset(dim=2, size=100):
     while not int(size * lower_pct) < y[y == 1].shape[0] < int(
             size * upper_pct):
         X, y = get_data()
+
+    r = int(size*noise_ratio)
+    if r > 0:
+        y = np.append(y[:-r], np.sign(np.random.rand(r)-0.5))
     return X, y
