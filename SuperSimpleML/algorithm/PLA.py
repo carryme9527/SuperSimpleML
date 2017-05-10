@@ -4,7 +4,6 @@ import numpy as np
 
 
 class PLA():
-
     def test(self, X):
         X_ = np.append(X, np.ones((len(X), 1)), axis=1)
         y_ = np.sign(np.inner(self.W, X_))

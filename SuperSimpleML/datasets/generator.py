@@ -32,7 +32,7 @@ def genRandomLinearBinaryDataset(dim=2, size=100, noise_ratio=0):
             size * upper_pct):
         X, y = get_data()
 
-    r = int(size*noise_ratio)
+    r = int(size * noise_ratio)
     if r > 0:
-        y = np.append(y[:-r], np.sign(np.random.rand(r)-0.5))
+        y = np.append(y[:-r], np.sign(np.random.rand(r) - 0.5))
     return X, y

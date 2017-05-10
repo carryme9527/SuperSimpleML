@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import numpy as np
 
+
 class PocketPLA():
     def test(self, X):
         X_ = np.append(X, np.ones((len(X), 1)), axis=1)
