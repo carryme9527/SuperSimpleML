@@ -10,10 +10,9 @@ def main(dim=2, size=100):
     X, y = ds_utils.shuffle(X, y)
     train_X, train_y, test_X, test_y = ds_utils.split(X, y, [0.8, 0.2])
 
-    algorithm = PLA(dim)
+    algorithm = PLA()
     algorithm.train(train_X, train_y)
-    accuracy = calculateAccuracy(test_y, algorithm.test(test_X))
-    return accuracy
+    return calculateAccuracy(test_y, algorithm.test(test_X))
 
 if __name__ == '__main__':
     dim = 4
