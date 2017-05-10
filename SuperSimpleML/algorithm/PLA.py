@@ -4,33 +4,23 @@ import numpy as np
 
 
 class PLA():
-    def __init__(self, dim):
-        self.dim = dim
-        self.W = np.zeros(self.dim + 1)
-        self.X = np.zeros((0, dim))
-        self.y = np.array([])
-        self.T = 0
+    def __init__(self):
+        pass
 
     def test(self, X):
         X_ = np.append(X, np.ones((X.shape[0], 1)), axis=1)
-        y_ = np.inner(self.W, X_)
-        y_[y_ > 0] = 1
-        y_[y_ <= 0] = -1
+        y_ = np.sign(np.inner(self.W, X_))
         return y_
 
-    def _append_training_data(self, X, y):
-        self.X = np.append(self.X, X, axis=0)
-        self.y = np.append(self.y, y, axis=0)
-
     def train(self, X, y):
-        self._append_training_data(X, y)
+        dim = X.shape[1]
+        self.W = np.zeros(dim + 1)
         while True:
-            self.T += 1
-            for i in range(self.X.shape[0]):
-                x = np.append(self.X[i], [1])
-                y_ = 1 if np.inner(self.W, x) > 0 else -1
-                if y_ != self.y[i]:
-                    self.W = self.W + self.y[i] * x
+            for i in range(X.shape[0]):
+                x = np.append(X[i], [1])
+                y_ = np.sign(np.inner(self.W, x))
+                if y_ != y[i]:
+                    self.W = self.W + y[i] * x
                     break
             else:
                 return
